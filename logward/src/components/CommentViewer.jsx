@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import CommentEditor from "./CommentEditor";
+import NameAndMessageEditor from "./NameAndMessageEditor";
 
 import arrowDown from "../images/arrow-down.svg";
 import deleteImg from "../images/delete.svg";
@@ -35,11 +35,14 @@ const CommentViewer = ({
   };
 
   const handleReplyClick = (id) => {
-    if (replyName.trim() && reply.trim()) {
+    const trimmedName = replyName.trim();
+    const trimmedReply = reply.trim();
+
+    if (trimmedName && trimmedReply) {
       const replyObj = {
         id: uuidv4(),
-        name: replyName.trim(),
-        comment: reply.trim(),
+        name: trimmedName,
+        comment: trimmedReply,
         timeStamp: new Date(),
         formattedDate: formattedDate(),
         type: "Reply",
@@ -232,13 +235,13 @@ const CommentViewer = ({
 
                 <div className="reply-container ml-[50px]">
                   {showReplyBox && (
-                    <CommentEditor
+                    <NameAndMessageEditor
                       title="Reply"
                       handleName={handleReplyName}
-                      handleComment={handleReply}
+                      handleMessage={handleReply}
                       handlePostClick={() => handleReplyClick(id)}
                       name={replyName}
-                      comment={reply}
+                      message={reply}
                       error={replyError}
                     />
                   )}

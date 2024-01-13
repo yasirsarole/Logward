@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import CommentEditor from "./CommentEditor";
+import NameAndMessageEditor from "./NameAndMessageEditor";
 import CommentViewer from "./CommentViewer";
 
 import { formattedDate } from "../utils/getCurrentFormattedDate";
@@ -129,13 +129,13 @@ const CommentBox = () => {
 
   return (
     <>
-      <CommentEditor
+      <NameAndMessageEditor
         title="Comment"
         handleName={handleName}
-        handleComment={handleComment}
+        handleMessage={handleComment}
         handlePostClick={handlePostClick}
         name={name}
-        comment={comment}
+        message={comment}
         error={error}
       />
       <CommentViewer

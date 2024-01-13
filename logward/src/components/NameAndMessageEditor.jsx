@@ -1,12 +1,12 @@
 import React from "react";
 
-const CommentEditor = ({
+const NameAndMessageEditor = ({
   title,
   handleName,
-  handleComment,
+  handleMessage,
   handlePostClick,
   name,
-  comment,
+  message,
   error,
 }) => {
   return (
@@ -32,8 +32,8 @@ const CommentEditor = ({
         <textarea
           placeholder={title}
           className="border border-gray-300 text-gray-900 text-sm rounded block w-full p-1 mb-3 px-2"
-          value={comment}
-          onChange={handleComment}
+          value={message}
+          onChange={handleMessage}
         />
         <button
           type="button"
@@ -47,4 +47,4 @@ const CommentEditor = ({
   );
 };
 
-export default CommentEditor;
+export default NameAndMessageEditor;
