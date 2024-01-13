@@ -32,7 +32,7 @@ const CommentBox = () => {
     const trimmedName = name.trim();
     const trimmedComment = comment.trim();
 
-    if (trimmedName && trimmedName) {
+    if (trimmedName && trimmedComment) {
       const commentObj = {
         id: uuidv4(),
         name: trimmedName,
