@@ -11,7 +11,11 @@ const CommentEditor = ({
 }) => {
   return (
     <div className="comment-editor py-4 flex justify-center">
-      <div className="editor-children p-4 border border-gray-300 rounded w-[600px] bg-gray-100 flex flex-col">
+      <div
+        className={`editor-children p-4 border border-gray-300 rounded bg-gray-100 flex flex-col ${
+          title === "Reply" ? "w-[550px]" : "w-[600px]"
+        }`}
+      >
         <div className="flex mb-2 justify-between">
           <span>{title}</span>
           {error && (

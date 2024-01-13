@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import CommentEditor from "./CommentEditor";
 import CommentViewer from "./CommentViewer";
 
+import { formattedDate } from "../utils/getCurrentFormattedDate";
+
 const CommentBox = () => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
@@ -14,37 +16,34 @@ const CommentBox = () => {
   //   set comments in state stored in localstorage
   useEffect(() => {
     setComments(JSON.parse(localStorage.getItem("comments") || "[]"));
+    setName("");
+    setComment("");
   }, []);
 
-  const handleName = (event) => {
-    const value = event.target.value;
-    setName(value);
+  const handleName = (e) => {
+    setName(e.target.value);
   };
 
-  const handleComment = (event) => {
-    const value = event.target.value;
-    setComment(value);
+  const handleComment = (e) => {
+    setComment(e.target.value);
   };
 
   const handlePostClick = (type) => {
-    if (name && comment) {
-      const timeStamp = new Date();
-      const formattedDate = timeStamp
-        .toLocaleDateString("en-GB", {
-          day: "numeric",
-          month: "short",
-          year: "numeric",
-        })
-        .replace(/ /g, " ");
+    const trimmedName = name.trim();
+    const trimmedComment = comment.trim();
 
+    if (trimmedName && trimmedName) {
       const commentObj = {
         id: uuidv4(),
-        name,
-        comment,
-        timeStamp,
-        formattedDate,
+        name: trimmedName,
+        comment: trimmedComment,
+        timeStamp: new Date(),
+        formattedDate: formattedDate(),
         type,
         replies: [],
+        showReplyBox: false,
+        editIsEnabled: false,
+        editValidation: false,
       };
 
       const localStorageComments = JSON.parse(
@@ -54,13 +53,12 @@ const CommentBox = () => {
         ? [commentObj, ...localStorageComments]
         : [...localStorageComments, commentObj];
 
-      // setting new comments in localstorage
-      localStorage.setItem("comments", JSON.stringify(newComments));
+      // setting new comments in localstorage and state
+      setUpdatedComments(newComments);
 
       // clearing name and comment input field after they are set
       setName("");
       setComment("");
-      setComments(newComments);
       setError(false);
     } else {
       setError(true);
@@ -71,8 +69,7 @@ const CommentBox = () => {
     const prevComments = JSON.parse(JSON.stringify(comments));
     const updatedComments = prevComments.filter((comment) => comment.id !== id);
 
-    setComments(updatedComments);
-    localStorage.setItem("comments", JSON.stringify(updatedComments));
+    setUpdatedComments(updatedComments);
   };
 
   const handleSort = () => {
@@ -81,8 +78,53 @@ const CommentBox = () => {
     const prevComments = JSON.parse(JSON.stringify(comments));
     const sortedComments = prevComments.reverse();
 
-    setComments(sortedComments);
-    localStorage.setItem("comments", JSON.stringify(sortedComments));
+    setUpdatedComments(sortedComments);
+  };
+
+  const setUpdatedComments = (updatedComments) => {
+    setComments(updatedComments);
+    localStorage.setItem("comments", JSON.stringify(updatedComments));
+  };
+
+  const onEditClick = (id) => {
+    const prevComments = JSON.parse(JSON.stringify(comments));
+    const updatedComments = prevComments.map((comment) => {
+      if (comment.id === id) {
+        comment.editIsEnabled = true;
+      }
+
+      return comment;
+    });
+
+    // setting new comments in localstorage and state
+    setUpdatedComments(updatedComments);
+  };
+
+  const handleEditChange = (id, newComment, blur) => {
+    const prevComments = JSON.parse(JSON.stringify(comments));
+
+    const updatedComments = prevComments.map((comment) => {
+      if (comment.id === id) {
+        if (!newComment.trim()) {
+          comment.editValidation = true;
+        } else {
+          comment.editValidation = false;
+        }
+
+        if (blur && newComment.trim()) {
+          comment.editIsEnabled = false;
+        }
+
+        comment.comment = newComment;
+      } else {
+        comment.editValidation = true;
+      }
+
+      return comment;
+    });
+
+    // setting new comments in localstorage and state
+    setUpdatedComments(updatedComments);
   };
 
   return (
@@ -101,6 +143,9 @@ const CommentBox = () => {
         handleCommentDelete={handleCommentDelete}
         handleSort={handleSort}
         sorted={sorted}
+        setUpdatedComments={setUpdatedComments}
+        onEditClick={onEditClick}
+        handleEditChange={handleEditChange}
       />
     </>
   );
