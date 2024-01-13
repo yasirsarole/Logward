@@ -5,6 +5,7 @@ import NameAndMessageEditor from "./NameAndMessageEditor";
 
 import arrowDown from "../images/arrow-down.svg";
 import deleteImg from "../images/delete.svg";
+import okCircle from "../images/ok-circle.svg";
 
 import { formattedDate } from "../utils/getCurrentFormattedDate";
 
@@ -190,19 +191,29 @@ const CommentViewer = ({
                   </div>
 
                   {editIsEnabled ? (
-                    <textarea
-                      className={`border ${
-                        editValidation ? "border-red-500" : "border-gray-300"
-                      } text-gray-900 text-sm rounded block w-full p-1 mb-3 px-2 mb-3 outline-none comment-textarea`}
-                      value={comment}
-                      onBlur={(e) =>
-                        handleEditChange(id, e.target.value, true, commentId)
-                      }
-                      autoFocus
-                      onChange={(e) =>
-                        handleEditChange(id, e.target.value, false, commentId)
-                      }
-                    />
+                    <div className="relative">
+                      <textarea
+                        className={`border ${
+                          editValidation ? "border-red-500" : "border-gray-300"
+                        } text-gray-900 text-sm rounded block w-full p-1 mb-3 px-2 mb-3 outline-none comment-textarea`}
+                        value={comment}
+                        onBlur={(e) =>
+                          handleEditChange(id, e.target.value, true, commentId)
+                        }
+                        autoFocus
+                        onChange={(e) =>
+                          handleEditChange(id, e.target.value, false, commentId)
+                        }
+                      />
+                      <img
+                        src={okCircle}
+                        alt="Add Reply"
+                        className="w-[25px] absolute right-[12px] top-[10px] cursor-pointer"
+                        onClick={() =>
+                          handleEditChange(id, comment, true, commentId)
+                        }
+                      />
+                    </div>
                   ) : (
                     <p className="mb-3">{comment}</p>
                   )}

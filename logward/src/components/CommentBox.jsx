@@ -88,6 +88,7 @@ const CommentBox = () => {
     const updatedComments = comments.map((comment) => {
       if (comment.id === id) {
         comment.editIsEnabled = true;
+        comment.editValidation = false;
       }
 
       return comment;
