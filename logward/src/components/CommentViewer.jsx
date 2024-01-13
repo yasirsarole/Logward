@@ -48,8 +48,7 @@ const CommentViewer = ({
         type: "Reply",
       };
 
-      const prevComments = JSON.parse(JSON.stringify(comments));
-      const updatedComments = prevComments.map((comment) => {
+      const updatedComments = comments.map((comment) => {
         if (comment.id === id) {
           comment.showReplyBox = false;
           comment.replies = [replyObj, ...(comment.replies || [])];
@@ -71,8 +70,7 @@ const CommentViewer = ({
   };
 
   const onReplyClick = (id) => {
-    const prevComments = JSON.parse(JSON.stringify(comments));
-    const updatedComments = prevComments.map((comment) => {
+    const updatedComments = comments.map((comment) => {
       if (comment.id === id) {
         comment.showReplyBox = true;
       } else {

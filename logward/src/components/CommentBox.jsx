@@ -66,18 +66,16 @@ const CommentBox = () => {
   };
 
   const handleCommentDelete = (id) => {
-    const prevComments = JSON.parse(JSON.stringify(comments));
-    const updatedComments = prevComments.filter((comment) => comment.id !== id);
+    const updatedComments = comments.filter((comment) => comment.id !== id);
 
     setUpdatedComments(updatedComments);
   };
 
   const handleSort = () => {
-    setSorted(!sorted);
-
     const prevComments = JSON.parse(JSON.stringify(comments));
     const sortedComments = prevComments.reverse();
 
+    setSorted(!sorted);
     setUpdatedComments(sortedComments);
   };
 
@@ -87,8 +85,7 @@ const CommentBox = () => {
   };
 
   const onEditClick = (id) => {
-    const prevComments = JSON.parse(JSON.stringify(comments));
-    const updatedComments = prevComments.map((comment) => {
+    const updatedComments = comments.map((comment) => {
       if (comment.id === id) {
         comment.editIsEnabled = true;
       }
@@ -101,9 +98,7 @@ const CommentBox = () => {
   };
 
   const handleEditChange = (id, newComment, blur) => {
-    const prevComments = JSON.parse(JSON.stringify(comments));
-
-    const updatedComments = prevComments.map((comment) => {
+    const updatedComments = comments.map((comment) => {
       if (comment.id === id) {
         if (!newComment.trim()) {
           comment.editValidation = true;
