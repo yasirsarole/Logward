@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Logward/static/css/main.0c9891c8.css",
-    "main.js": "/Logward/static/js/main.96085eff.js",
+    "main.css": "/Logward/static/css/main.00ee3de0.css",
+    "main.js": "/Logward/static/js/main.a22b6dff.js",
     "static/js/787.fdb5f258.chunk.js": "/Logward/static/js/787.fdb5f258.chunk.js",
     "static/media/delete.svg": "/Logward/static/media/delete.cec88e4e1c18bde67f691129eedf04cc.svg",
     "index.html": "/Logward/index.html",
     "static/media/ok-circle.svg": "/Logward/static/media/ok-circle.1db34344c3084978050d32fe9c134c97.svg",
     "static/media/arrow-down.svg": "/Logward/static/media/arrow-down.bdf65ac36bf68f0a13abee73aa11fd93.svg",
-    "main.0c9891c8.css.map": "/Logward/static/css/main.0c9891c8.css.map",
-    "main.96085eff.js.map": "/Logward/static/js/main.96085eff.js.map",
+    "main.00ee3de0.css.map": "/Logward/static/css/main.00ee3de0.css.map",
+    "main.a22b6dff.js.map": "/Logward/static/js/main.a22b6dff.js.map",
     "787.fdb5f258.chunk.js.map": "/Logward/static/js/787.fdb5f258.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0c9891c8.css",
-    "static/js/main.96085eff.js"
+    "static/css/main.00ee3de0.css",
+    "static/js/main.a22b6dff.js"
   ]
 }
