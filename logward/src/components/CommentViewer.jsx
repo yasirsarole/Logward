@@ -186,7 +186,9 @@ const CommentViewer = ({
               >
                 <div className="editor-children p-4 border border-gray-300 rounded bg-gray-100 flex flex-col mb-3 relative">
                   <div className="flex justify-between mb-3">
-                    <span className="font-bold capitalize">{name}</span>
+                    <span className="font-bold capitalize max-w-[450px] break-all">
+                      {name}
+                    </span>
                     <span>{formattedDate}</span>
                   </div>
 
@@ -195,7 +197,7 @@ const CommentViewer = ({
                       <textarea
                         className={`border ${
                           editValidation ? "border-red-500" : "border-gray-300"
-                        } text-gray-900 text-sm rounded block w-full p-1 mb-3 px-2 mb-3 outline-none comment-textarea`}
+                        } text-gray-900 text-sm rounded block w-full p-1 mb-3 px-2 mb-3 outline-none`}
                         value={comment}
                         onBlur={(e) =>
                           handleEditChange(id, e.target.value, true, commentId)
@@ -204,6 +206,7 @@ const CommentViewer = ({
                         onChange={(e) =>
                           handleEditChange(id, e.target.value, false, commentId)
                         }
+                        rows={3}
                       />
                       <img
                         src={okCircle}
@@ -215,7 +218,7 @@ const CommentViewer = ({
                       />
                     </div>
                   ) : (
-                    <p className="mb-3">{comment}</p>
+                    <p className="mb-3 max-w-[450px] break-all">{comment}</p>
                   )}
 
                   <div className="flex font-bold text-blue-500">

@@ -34,6 +34,7 @@ const NameAndMessageEditor = ({
           className="border border-gray-300 text-gray-900 text-sm rounded block w-full p-1 mb-3 px-2"
           value={message}
           onChange={handleMessage}
+          rows={3}
         />
         <button
           type="button"
